@@ -17,7 +17,6 @@
             min-height: 100vh;
         }
 
-        /* Fundo Animado */
         .stars {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -27,7 +26,6 @@
             opacity: 0.5;
         }
 
-        /* Tela de Senha Moderna */
         #passwordScreen {
             position: fixed;
             inset: 0;
@@ -77,9 +75,6 @@
             letter-spacing: 1px;
         }
 
-        #enterButton:hover { transform: scale(1.05); filter: brightness(1.1); }
-
-        /* Conteúdo Principal */
         #hommageContainer {
             display: none;
             flex-direction: column;
@@ -96,7 +91,6 @@
             background: linear-gradient(to right, #ff99cc, #ffffff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 5px 15px rgba(255, 77, 148, 0.4));
         }
 
         .message-box {
@@ -109,10 +103,8 @@
             line-height: 1.8;
             font-size: 1.1em;
             margin-bottom: 50px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
-        /* Polaroid 2.0 */
         .photo-gallery {
             display: flex;
             flex-wrap: wrap;
@@ -147,28 +139,27 @@
             background: #fff;
             padding: 15px 15px 50px 15px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        .front img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 8px;
+        /* Estilo para quando não tem foto */
+        .front {
+            background: #f0f0f0;
+            color: #ccc;
+            font-size: 3em;
         }
 
         .back {
             transform: rotateY(180deg);
             background: #fff;
             color: #2e004f;
-            display: flex;
-            padding: 30px;
-            align-items: center;
             font-family: 'Dancing Script', cursive;
             font-size: 1.8em;
             text-align: center;
         }
 
-        /* Botões de Ação */
         .controls {
             margin-top: 60px;
             display: flex;
@@ -183,19 +174,12 @@
             border: none;
             cursor: pointer;
             font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
             text-decoration: none;
         }
 
         .btn-music { background: #fff; color: #2e004f; }
         .btn-gift { background: #ff4d94; color: #fff; }
 
-        .btn:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.4); }
-
-        /* Corações */
         .heart {
             position: fixed;
             pointer-events: none;
@@ -207,7 +191,6 @@
             0% { transform: translateY(100vh) scale(0); opacity: 1; }
             100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
         }
-
     </style>
 </head>
 <body>
@@ -224,7 +207,7 @@
             <input type="password" id="passwordInput" placeholder="Sua senha secreta...">
             <button id="enterButton">Abrir Presente</button>
             <p id="hint" style="font-size: 0.85em; margin-top: 15px; color: #ff99cc;"></p>
-            <p id="error" style="color:#ff4d4d; display:none; font-size: 0.9em; margin-top: 10px;">Senha incorreta, tente de novo meu amor! 😢</p>
+            <p id="error" style="color:#ff4d4d; display:none; font-size: 0.9em; margin-top: 10px;">Senha incorreta! 😢</p>
         </div>
     </div>
 
@@ -253,10 +236,7 @@
             const music = document.getElementById("birthdayMusic");
 
             if (input === senhaCorreta) {
-                // Tenta tocar a música imediatamente após a interação do clique
                 music.play().catch(e => console.log("Erro ao tocar música:", e));
-
-                // Esconde a tela de senha
                 document.getElementById("passwordScreen").style.opacity = "0";
                 setTimeout(() => {
                     document.getElementById("passwordScreen").style.display = "none";
@@ -265,13 +245,12 @@
                 }, 500);
             } else {
                 document.getElementById("error").style.display = "block";
-                document.getElementById("passwordInput").value = "";
             }
         });
 
         function iniciarSite() {
             const titulo = "Para você, Meu Amor...";
-            const texto = `Bê… você é o acaso mais lindo que já aconteceu na minha vida. 💫 É impressionante como tudo fica mais leve quando você aparece — até o silêncio ganha som, e o mundo parece sorrir.\n\nEu amo o jeito que você ri das minhas brincadeiras sem graça, o jeito que reclama mas no fundo tá sorrindo, e o jeito que me faz querer ser alguém melhor só pra te fazer feliz. Você é meu refúgio, minha melodia, meu sentido de viver.\n\nFeliz aniversário, minha princesa, minha futura esposa. 🎂💞 Te amo daqui até o infinito. 💫`;
+            const texto = `Bê… você é o acaso mais lindo que já aconteceu na minha vida. 💫\n\nEu amo cada detalhe seu e o jeito que você me faz querer ser alguém melhor. Você é meu refúgio e meu sentido de viver.\n\nFeliz aniversário, minha princesa. 🎂💞 Te amo daqui até o infinito. 💫`;
 
             let i = 0, j = 0;
             function digitarTitulo() {
@@ -290,43 +269,41 @@
 
             digitarTitulo();
 
+            // ARRAY DE FOTOS (LINKS REMOVIDOS)
             const fotos = [
-                ["https://github.com/user-attachments/assets/128f9cbf-805c-477b-9d58-f91d7f0b4430", "Esse olhar que me desmonta... 😍"],
-                ["https://github.com/user-attachments/assets/313d96d1-e437-4d42-979b-2f5957127a0c", "Minha craque favorita 🏐✨"],
-                ["https://github.com/user-attachments/assets/cb50c28f-cfb2-46dc-adcf-8a47c4958bdd", "Até brava você é perfeita! 😏"],
-                ["https://github.com/user-attachments/assets/473bb60c-fbc2-4a6e-a14b-0aeff7baef18", "Uma verdadeira rainha 💃"],
-                ["https://github.com/user-attachments/assets/636cc626-06e1-44a0-9f99-326a37b74bf0", "Sem palavras para você... 😍"],
-                ["https://github.com/user-attachments/assets/5f1384ea-41f4-4ba9-b2a7-6aac28029180", "O sorriso que ilumina meu dia 😁"],
-                ["https://github.com/user-attachments/assets/26a18edb-6e3c-4bb7-812d-4a70a16d8005", "Minha maior motivação 💖"],
-                ["https://github.com/user-attachments/assets/0e0e848b-f7ca-4a28-bdd7-a30a4569d7a1", "Sempre a mais gata da festa 😈"],
-                ["https://github.com/user-attachments/assets/edb88f91-a1cf-4d14-8cff-eb178ad54d00", "Meu presente de todos os dias 🎁"]
+                ["", "Esse olhar que me desmonta... 😍"],
+                ["", "Minha craque favorita 🏐✨"],
+                ["", "Até brava você é perfeita! 😏"],
+                ["", "Uma verdadeira rainha 💃"],
+                ["", "O sorriso que ilumina meu dia 😁"],
+                ["", "Meu presente de todos os dias 🎁"]
             ];
 
             const gallery = document.getElementById("gallery");
             fotos.forEach(f => {
                 const card = document.createElement("div");
                 card.className = "photo-card";
+                // Se o link da foto estiver vazio, exibe um coração
+                const conteudoFront = f[0] ? `<img src="${f[0]}" style="width:100%; height:100%; object-fit:cover; border-radius:8px;">` : `❤️`;
+                
                 card.innerHTML = `<div class="inner">
-                    <div class="front"><img src="${f[0]}"></div>
+                    <div class="front">${conteudoFront}</div>
                     <div class="back">${f[1]}</div>
                 </div>`;
                 card.onclick = () => card.classList.toggle("flip");
                 gallery.appendChild(card);
             });
 
-            // Chuva de corações constante
             setInterval(() => {
                 const h = document.createElement("div");
                 h.className = "heart";
                 h.innerHTML = ["❤️","💖","✨","🌸","💜"][Math.floor(Math.random()*5)];
                 h.style.left = Math.random() * 100 + "vw";
                 h.style.animationDuration = (Math.random() * 3 + 2) + "s";
-                h.style.fontSize = (Math.random() * 20 + 15) + "px";
                 document.body.appendChild(h);
                 setTimeout(() => h.remove(), 4000);
             }, 350);
 
-            // Controle Manual da Música (Caso ela queira pausar)
             const music = document.getElementById("birthdayMusic");
             document.getElementById("musicButton").onclick = function() {
                 if (music.paused) { 
